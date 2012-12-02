@@ -2,12 +2,24 @@
 
 > Check that ip match this computer
 
-##Work in progress
+## Installation
 
-```javascript
+```sheel
+npm install isme
+```
+
+## Documentation
+
+`isme` takes a ip string, and returns `true` if is was recognised as a network
+interface address.
+
+```JavaScript
   var isme = require('isme');
+  var assert = require('assert');
 
-  console.log(isme('127.0.0.1')); // any ip
+  assert.ok(isme('::1')); // IPv6 works
+  assert.ok(isme('127.0.0.1')); // IPv4 works
+  assert.ok(isme('192.168.0.198')); // public IPv4
 ```
 
 ##License
