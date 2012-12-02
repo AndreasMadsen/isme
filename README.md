@@ -1,6 +1,6 @@
 #isme
 
-> Create a autodiscover horizontal scaleable tcp cluster
+> Check that ip match this computer
 
 ##Work in progress
 
