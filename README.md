@@ -11,15 +11,31 @@ npm install isme
 ## Documentation
 
 `isme` takes a ip string, and returns `true` if is was recognised as a network
-interface address.
+interface address. There is a second optional argument there limits the scan,
+it can be `local`, `public` or `any`.
 
 ```JavaScript
   var isme = require('isme');
   var assert = require('assert');
 
-  assert.ok(isme('::1')); // IPv6 works
   assert.ok(isme('127.0.0.1')); // IPv4 works
+  assert.ok(isme('::1')); // IPv6 works
+  assert.ok(isme('0.0.0.0')); // any IPv4 works
+  assert.ok(isme('::0')); // any IPv6 works
   assert.ok(isme('192.168.0.198')); // public IPv4
+
+  //'local' only matchs loopback addresses
+  assert.equal(isme('::1', 'local'), true);
+  assert.equal(isme('192.168.0.198', 'local'), false);
+
+  //'public' only matchs public addresses
+  assert.equal(isme('::1', 'local'), false);
+  assert.equal(isme('192.168.0.198', 'local'), true);
+
+  //'any' only matchs any addresses
+  assert.equal(isme('0.0.0.0', 'any'), true);
+  assert.equal(isme('::0', 'any'), true);
+  assert.equal(isme('127.0.0.1', 'any'), false); // anything else fails
 ```
 
 ##License
